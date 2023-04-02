@@ -2,6 +2,7 @@ TOOLCHAIN_PREFIX = riscv64-unknown-elf-
 AS = $(TOOLCHAIN_PREFIX)as
 LD = $(TOOLCHAIN_PREFIX)ld
 OBJCOPY = $(TOOLCHAIN_PREFIX)objcopy
+GDB = $(TOOLCHAIN_PREFIX)gdb
 QEMU32 = qemu-system-riscv32
 QEMU64 = qemu-system-riscv64
 
@@ -20,7 +21,6 @@ hello.o: hello.s
 .PHONY: run
 run: run32
 
-.PHONY: run32
 run32: all
 	@echo 'Type "Ctrl-a x" to quit'
 	$(QEMU32) -machine virt -nographic -device loader,file=hello.elf
@@ -29,6 +29,16 @@ run32: all
 run64: all
 	@echo 'Type "Ctrl-a x" to quit'
 	$(QEMU64) -machine virt -nographic -device loader,file=hello.elf
+
+.PHONY: debug
+debug: debug32
+
+.PHONY: debug32
+debug32: all
+	@echo 'Type "Ctrl-a x" to quit'
+	@echo "In another window:"
+	@echo "$(GDB) -x gdb.txt"
+	$(QEMU32) -machine virt -nographic -device loader,file=hello.elf -s -S
 
 .PHONY: dts
 dts:
