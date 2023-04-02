@@ -1,2 +1,3 @@
-# riscv-bare-metal
-RISC-V bare metal on QEMU
+# Overview
+
+Simple RISC-V bare metal on QEMU.
