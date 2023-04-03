@@ -1,5 +1,5 @@
 .section .text
-.global _start
+.globl _start
 
 .equ UART_BASE, 0x10000000
 .equ UART_THR,  0           # Transmit Holding Register (THR)
