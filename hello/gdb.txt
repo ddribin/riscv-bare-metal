@@ -1,7 +1,6 @@
 file hello.elf
 target remote :1234
 br *0x80000000
-continue
 set pagination off
 disassemble _start, +0x30
 set pagination on
