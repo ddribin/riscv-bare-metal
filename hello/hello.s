@@ -14,8 +14,15 @@ _start:
     addi    s2, s2, 1       # s2 := s2 + 1
     j       1b              # branch back to 1
 
+.equ SIFIVE_TEST, 0x100000
+.equ SIFIVE_TEST_POWEROFF_ERROR, 0x3333
+.equ SIFIVE_TEST_POWEROFF_SUCCESS, 0x5555
+.equ SIFIVE_TEST_REBOOT, 0x7777
+
 finish:
-    j       finish          # infinite loop
+    li      s1, SIFIVE_TEST
+    li      s2, SIFIVE_TEST_POWEROFF_SUCCESS
+    sw      s2, 0(s1)
 
 .section .rodata
 message:

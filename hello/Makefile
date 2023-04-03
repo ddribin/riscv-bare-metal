@@ -22,12 +22,10 @@ hello.o: hello.s
 run: run32
 
 run32: all
-	@echo 'Type "Ctrl-a x" to quit'
 	$(QEMU32) -machine virt -nographic -device loader,file=hello.elf
 
 .PHONY: run64
 run64: all
-	@echo 'Type "Ctrl-a x" to quit'
 	$(QEMU64) -machine virt -nographic -device loader,file=hello.elf
 
 .PHONY: debug
@@ -35,7 +33,6 @@ debug: debug32
 
 .PHONY: debug32
 debug32: all
-	@echo 'Type "Ctrl-a x" to quit'
 	@echo "In another window:"
 	@echo "$(GDB) -x gdb.txt"
 	$(QEMU32) -machine virt -nographic -device loader,file=hello.elf -s -S
