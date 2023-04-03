@@ -8,8 +8,15 @@
 
 # SiFive Test Device
 .equ SIFIVE_TEST, 0x100000
+
+# Causes machine to power off with an error.
+# Error code can be in upper 16-bits
 .equ SIFIVE_TEST_POWEROFF_ERROR, 0x3333
+
+# Causes machine to power off with success.
 .equ SIFIVE_TEST_POWEROFF_SUCCESS, 0x5555
+
+# Causes the machine to reboot.
 .equ SIFIVE_TEST_REBOOT, 0x7777
 
 
@@ -22,7 +29,7 @@ _start:
 1:
     lb      s4, 0(s2)       # s4 := (s2)
     beqz    s4, finish      # if s4 == 0, branch to finish
-    sb      s4, UART_THR(s1)       # (s1) := s4
+    sb      s4, UART_THR(s1) # (s1) := s4
     addi    s2, s2, 1       # s2 := s2 + 1
     j       1b              # branch back to 1
 
